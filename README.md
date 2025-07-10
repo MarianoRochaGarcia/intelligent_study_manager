@@ -1,0 +1,1 @@
+# Intelligent study manager
