@@ -1,0 +1,26 @@
+# Entorno virtual
+venv/
+env/
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Configuración personal
+*.env
+*.DS_Store
+*.vscode/
+
+# Archivos de migraciones (opcional, puedes dejarlo si te interesa)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Static & media files generados por Django
+/static/
+/media/
+/staticfiles/
+
+# Archivos del sistema
+Thumbs.db
