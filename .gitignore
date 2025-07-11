@@ -1,26 +1,33 @@
-# Entorno virtual
+# Virtual envirioment
 venv/
 env/
 
-# Archivos de Python
+# Python files
 __pycache__/
 *.py[cod]
 *.sqlite3
 *.log
 
-# Configuración personal
+# Personal Settings
 *.env
 *.DS_Store
 *.vscode/
 
-# Archivos de migraciones (opcional, puedes dejarlo si te interesa)
+# Migrations Files
 */migrations/__pycache__/
 */migrations/*.pyc
 
-# Static & media files generados por Django
+# Static & media files Django
 /static/
 /media/
 /staticfiles/
+/static/css/output.css
 
-# Archivos del sistema
+# Files sistem
 Thumbs.db
+
+# Tailwind build
+assets/css/*.css
+
+# Node.js
+node_modules/

@@ -1,0 +1,24 @@
+{
+  "name": "intelligent_study_manager",
+  "version": "1.0.0",
+  "description": "A smart and simple web application to help you manage your study schedule and track your  academic or professional progress over time. Built with Django and PostgreSQL.",
+  "homepage": "https://github.com/MarianoRochaGarcia/intelligent_study_manager#readme",
+  "bugs": {
+    "url": "https://github.com/MarianoRochaGarcia/intelligent_study_manager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarianoRochaGarcia/intelligent_study_manager.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
+}
