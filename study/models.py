@@ -7,6 +7,8 @@ class Subject(models.Model):
     description = models.CharField(max_length=100, blank=True, null=True)
     color = models.CharField(max_length=15, blank=False, null=False)
 
+    def __str__(self):
+        return self.name
 
 class StudyPlan(models.Model):
 
@@ -17,7 +19,7 @@ class StudyPlan(models.Model):
         ('cancelled', 'Cancelado')
     ]
     
-    title = models.CharField(max_length=15, blank=False, null=False)
+    title = models.CharField(max_length=30, blank=False, null=False)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     start_date = models.DateField()
@@ -35,7 +37,7 @@ class StudySession(models.Model):
         ('completed', 'Concluido'),
         ('cancelled', 'Cancelado'),
     ]
-    title = models.CharField(max_length=15)
+    title = models.CharField(max_length=30)
     study_plan = models.ForeignKey(StudyPlan, on_delete=models.CASCADE)
     start = models.DateTimeField()
     end = models.DateTimeField()
