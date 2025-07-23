@@ -1,5 +1,5 @@
 # Intelligent study manager
-# Smart Study Manager 📚
+# Smart Study Manager 
 
 A smart and simple web application to help you manage your study schedule and track your 
 academic or professional progress over time. Built with Django and PostgreSQL.
@@ -11,7 +11,7 @@ academic or professional progress over time. Built with Django and PostgreSQL.
 - Create and organize study topics
 - Schedule sessions by date and time
 - Track your progress (completed vs. pending)
-- View weekly and monthly study statistics
+- View weekly and monthly study stadistics
 
 ---
 
