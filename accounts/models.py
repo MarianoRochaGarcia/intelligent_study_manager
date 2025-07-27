@@ -10,7 +10,11 @@ class User(AbstractUser):
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField()
+    profile_picture = models.ImageField(
+        upload_to='profile_pics/',
+        default='profile_pics/defaultpng',
+        blank=True
+    )
     overall_progress = models.FloatField(default=0.0)
 
     def __str__(self):
