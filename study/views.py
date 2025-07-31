@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import *
-from collections import defaultdict
+from django.contrib import messages
+from .forms import SubjectForm, StudyPlanForm
+from django.shortcuts import redirect
 
 def index(request):
 
@@ -33,12 +35,31 @@ def subjects(request):
     return render(request, 'study/subjects.html', context)
 
 def subject_view(request, name):
+
     subject = Subject.objects.get(name=name)
     context = {
         'subject' : subject
     }
 
-    return render(request, 'subject_view.html', context)
+    return render(request, 'study/subject_view.html', context)
+
+def subject_edit(request, name):
+
+    subject = Subject.objects.get(name=name)
+    if request.method == 'GET':
+        form = SubjectForm(instance=subject)
+        context = {
+            'subject': subject,
+            'form': form,
+            'name': name
+        }
+        return render(request, 'study/subject_edit.html', context)
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, instance=subject)
+        if form.is_valid():
+           subject = form.save()
+           messages.success(request, 'Materia actualizada correctamente')
+           return redirect('subject_view', name=subject.name)
 
 def sessions(request):
     profile = request.user.profile
@@ -53,13 +74,38 @@ def sessions(request):
         'in_progress_sessions' : in_progress_sessions,
         'completed_sessions' : completed_sessions
     }
-    # for plan in study_plans:
-    #     plan.has_sessions = plan.sessions.exists()
-    #     plan.ordered_sessions = plan.sessions.all().order_by('end')
-    # context = {
-    #     'study_plans':study_plans
-    # }
+
     return render(request, 'study/sessions.html', context)
 
 def study_plans(request):
-    return render(request, 'study_plans.html', {})
+    profile = request.user.profile
+    study_plans = StudyPlan.objects.filter(profile=profile)
+    context = {
+        'study_plans': study_plans
+    }
+    return render(request, 'study/study_plans.html', context)
+
+def study_plan_view(request, title):
+    study_plan = StudyPlan.objects.get(title=title)
+    context = {
+        'study_plan': study_plan
+    }
+
+    return render(request, 'study/study_plan_view.html', context)
+
+def study_plan_edit(request, title):
+
+    study_plan = StudyPlan.objects.get(title=title)
+    if request.method == "GET":
+        form = StudyPlanForm(instance=study_plan)
+        context = {
+            'study_plan' : study_plan,
+            'form' : form,
+            'title' : title
+        }
+        return render(request, 'study/study_plan_edit.html', context)
+    if request.method == "POST":
+        form = StudyPlanForm(request.POST, instance=study_plan)
+        if form.is_valid():
+            study_plan = form.save()
+            return redirect('study_plan_view', title = study_plan.title)

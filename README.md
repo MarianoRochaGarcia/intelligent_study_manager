@@ -1,5 +1,4 @@
 # Intelligent study manager
-# Smart Study Manager 
 
 A smart and simple web application to help you manage your study schedule and track your 
 academic or professional progress over time. Built with Django and PostgreSQL.

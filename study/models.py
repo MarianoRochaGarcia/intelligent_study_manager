@@ -20,17 +20,18 @@ class Subject(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=50, blank=True, null=True, default='Sin asignar')
-    description = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
     color = models.CharField(blank=False, null=False, choices=SUBJECT_COLORS)
 
     def get_color_classes(self):
         color_map = {
             'green': 'bg-green-100 text-green-800',
             'lime': 'bg-lime-100 text-lime-800',
-            'teal': 'bg-teal-100 text-teal-800',
+            'teal': 'bg-[#D2EBE5] text-[#1E7460]',
             'blue': 'bg-blue-100 text-blue-800',
             'violet': 'bg-violet-100 text-violet-800',
             'purple': 'bg-purple-100 text-purple-800',
+            'wine' : 'bg-[#B28092] text-[#A8003A]',
             'red': 'bg-red-100 text-red-800',
             'orange': 'bg-orange-100 text-orange-800',
             'yellow': 'bg-yellow-100 text-yellow-800',
@@ -41,10 +42,11 @@ class Subject(models.Model):
         color_map = {
             'green': 'bg-green-100',
             'lime': 'bg-lime-100',
-            'teal': 'bg-teal-100',
+            'teal': 'bg-[#D2EBE5]',
             'blue': 'bg-blue-100',
             'violet': 'bg-violet-100',
             'purple': 'bg-purple-100',
+            'wine' : 'bg-[#E7D5DC]',
             'red': 'bg-red-100',
             'orange': 'bg-orange-100',
             'yellow': 'bg-yellow-100',
@@ -55,15 +57,62 @@ class Subject(models.Model):
         color_map = {
             'green': 'text-green-800',
             'lime': 'text-lime-800',
-            'teal': 'text-teal-800',
+            'teal': 'text-[#1E7460]',
             'blue': 'text-blue-800',
             'violet': 'text-violet-800',
             'purple': 'text-purple-800',
+            'wine' : 'text-[#A8003A]',
             'red': 'text-red-800',
             'orange': 'text-orange-800',
             'yellow': 'text-yellow-800',
         }
         return color_map.get(self.color)
+    
+    def get_border_classes(self):
+        color_map = {
+            'green': 'border-green-800',
+            'lime': 'border-lime-800',
+            'teal': 'border-[#1E7460]',
+            'blue': 'border-blue-800',
+            'violet': 'border-violet-800',
+            'purple': 'border-purple-800',
+            'wine' : 'border-[#A8003A]',
+            'red': 'border-red-800',
+            'orange': 'border-orange-800',
+            'yellow': 'border-yellow-800',
+        }
+        return color_map.get(self.color)
+    
+    def get_hover_classes(self):
+        color_map = {
+            'green': 'hover:bg-green-50',
+            'lime': 'hover:bg-lime-50',
+            'teal': 'hover:bg-[#E6EFED]',
+            'blue': 'hover:bg-blue-50',
+            'violet': 'hover:bg-violet-50',
+            'purple': 'hover:bg-purple-50',
+            'wine' : 'hover:bg-[#EFE8EA]',
+            'red': 'hover:bg-red-50',
+            'orange': 'hover:bg-orange-50',
+            'yellow': 'hover:bg-yellow-50',
+        }
+        return color_map.get(self.color)
+    
+    def get_divide_classes(self):
+        color_map = {
+            'green': 'divide-green-200',
+            'lime': 'divide-lime-200',
+            'teal': 'divide-[#1E7460]',
+            'blue': 'divide-blue-200',
+            'violet': 'divide-violet-200',
+            'purple': 'divide-purple-200',
+            'wine' : 'divide-[#A8003A]',
+            'red': 'divide-red-200',
+            'orange': 'divide-orange-200',
+            'yellow': 'divide-yellow-200',
+        }
+        return color_map.get(self.color)
+
 
     def __str__(self):
         return self.name

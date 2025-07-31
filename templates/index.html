@@ -52,7 +52,7 @@
         {% for study_plan in study_plans %}
           <li class="p-4 bg-indigo-50 rounded-lg shadow-sm hover:bg-indigo-200">
             <h3 class="font-bold text-lg text-indigo-800">
-              <a href="{% url 'subjects' %}" class="hover:underline hover:caret-violet-600">
+              <a href="{% url 'study_plan_view' title=study_plan.title %}" class="hover:underline hover:caret-violet-600">
                 {{ study_plan.title }}
               </a>
             </h3>

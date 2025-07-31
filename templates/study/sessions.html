@@ -7,58 +7,64 @@
         </h1>
 
         <ul class='space-y-5'>
-            <h3 class='font-bold text-yellow-800 text-2xl'>En progreso</h3>
-            {% for session in in_progress_sessions %}  
-                <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
-                    <p>
-                        <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
-                            {{session.title}}
-                        </a>
-                    </p>
-                    <div class="font-semibold">
-                        <p>Plan estudio: {{session.study_plan }}</p>
-                        <p>Notas: {{session.notes}}</p>
-                        <p>Inicio: {{session.start}}</p>
-                        <p>Fin: {{session.end}}</p>
-                    </div>     
-                </li>
-            {% endfor %}
 
-            <h3 class='font-bold text-blue-800 text-2xl'>Programadas</h3>
-        
-            {% for session in scheduled_sessions %}  
-                <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
-                    <p>
-                        <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
-                            {{session.title}}
-                        </a>
-                    </p>
-                    <div class="font-semibold">
-                        <p>Plan estudio: {{session.study_plan }}</p>
-                        <p>Notas: {{session.notes}}</p>
-                        <p>Inicio: {{session.start}}</p>
-                        <p>Fin: {{session.end}}</p>
-                    </div>     
-                </li>
-            {% endfor %}
+            {% if  in_progress_sessions %}
+                <h3 class='font-bold text-yellow-800 text-2xl'>En progreso</h3>
+                {% for session in in_progress_sessions %}  
+                    <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
+                        <p>
+                            <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
+                                {{session.title}}
+                            </a>
+                        </p>
+                        <div class="font-semibold">
+                            <p>Plan estudio: {{session.study_plan }}</p>
+                            <p>Notas: {{session.notes}}</p>
+                            <p>Inicio: {{session.start}}</p>
+                            <p>Fin: {{session.end}}</p>
+                        </div>     
+                    </li>
+                {% endfor %}
+            {% endif %}
 
-            <h3 class='font-bold text-green-800 text-2xl'>Terminadas</h3>
 
-            {% for session in completed_sessions %}  
-                <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
-                    <p>
-                        <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
-                            {{session.title}}
-                        </a>
-                    </p>
-                    <div class="font-semibold">
-                        <p>Plan estudio: {{session.study_plan }}</p>
-                        <p>Notas: {{session.notes}}</p>
-                        <p>Inicio: {{session.start}}</p>
-                        <p>Fin: {{session.end}}</p>
-                    </div>     
-                </li>
-            {% endfor %}
+            {% if  shceduled_sessions%}
+                <h3 class='font-bold text-blue-800 text-2xl'>Programadas</h3>
+                {% for session in scheduled_sessions %}  
+                    <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
+                        <p>
+                            <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
+                                {{session.title}}
+                            </a>
+                        </p>
+                        <div class="font-semibold">
+                            <p>Plan estudio: {{session.study_plan }}</p>
+                            <p>Notas: {{session.notes}}</p>
+                            <p>Inicio: {{session.start}}</p>
+                            <p>Fin: {{session.end}}</p>
+                        </div>     
+                    </li>
+                {% endfor %}
+            {% endif %}
+            
+            {% if  completed_sessions %}
+                <h3 class='font-bold text-green-800 text-2xl'>Terminadas</h3>
+                {% for session in completed_sessions %}  
+                    <li class="p-3 {{session.get_color_status}} rounded-2xl shadow-sm transition-transform transform hover:scale-[1.02] duration-200">
+                        <p>
+                            <a href="{% url 'session_view' title=session.title %}" class="text-lg font-bold hover:underline ">
+                                {{session.title}}
+                            </a>
+                        </p>
+                        <div class="font-semibold">
+                            <p>Plan estudio: {{session.study_plan }}</p>
+                            <p>Notas: {{session.notes}}</p>
+                            <p>Inicio: {{session.start}}</p>
+                            <p>Fin: {{session.end}}</p>
+                        </div>     
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
     </section>
 {% endblock 'content' %}
