@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import *
 from django.contrib import messages
-from .forms import SubjectForm, StudyPlanForm
+from .forms import SubjectForm, StudyPlanForm, SessionForm
 from django.shortcuts import redirect
 
 def index(request):
@@ -60,6 +60,11 @@ def subject_edit(request, name):
            subject = form.save()
            messages.success(request, 'Materia actualizada correctamente')
            return redirect('subject_view', name=subject.name)
+        
+def subject_delete(request, name):
+    subject = Subject.objects.get(name=name)
+    subject.delete()
+    return redirect('subjects')
 
 def sessions(request):
     profile = request.user.profile
@@ -76,6 +81,34 @@ def sessions(request):
     }
 
     return render(request, 'study/sessions.html', context)
+
+def session_view(request, title):
+    session = StudySession.objects.get(title=title)
+    context = {
+        'session' : session
+    }
+    return render(request, 'study/session_view.html', context)
+
+def session_edit(request, title):
+    session = StudySession.objects.get(title=title)
+    if request.method == 'GET':
+        form = SessionForm(instance=session)
+        context = {
+            'session': session,
+            'form': form,
+            'title': title
+        }
+        return render(request, 'study/session_edit.html', context)
+    if request.method == 'POST':
+        form = SessionForm(request.POST, instance=session)
+        if form.is_valid():
+            session = form.save()
+            return redirect('session_view', title=session.title)
+        
+def session_delete(request, title):
+    session = StudySession.objects.get(title=title)
+    session.delete()
+    return redirect('sessions') 
 
 def study_plans(request):
     profile = request.user.profile
@@ -109,3 +142,8 @@ def study_plan_edit(request, title):
         if form.is_valid():
             study_plan = form.save()
             return redirect('study_plan_view', title = study_plan.title)
+
+def study_plan_delete(request, title):
+    study_plan = StudyPlan.objects.get(title=title)
+    study_plan.delete()
+    return redirect('study_plans') 

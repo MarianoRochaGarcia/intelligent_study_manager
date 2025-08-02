@@ -64,9 +64,13 @@
                 </tr>
             </tbody>
         </table>
-        <div class="my-3">
-            <a href="{% url 'study_plan_edit' title=study_plan.title %}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md">
+        <div class="mt-5">
+            <a href="{% url 'study_plan_edit' title=study_plan.title %}" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md mr-2">
                 Editar
+            </a>
+            </a>
+            <a href="{% url 'study_plan_delete' title=study_plan.title %}" class="px-4 py-2 bg-red-400 hover:bg-red-500 text-white rounded-md">
+                Eliminar
             </a>
         </div>
     </div>

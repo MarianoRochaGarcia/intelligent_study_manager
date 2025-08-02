@@ -1,0 +1,71 @@
+{% extends "layout/indexview.html" %}
+
+{% block 'content' %}
+    <div class="p-6 m-2.5 max-w-4xl mx-auto">
+        <form action="{% url 'session_edit' title=title %}" method="POST">
+            <table class="min-w-full border {{session.study_plan.subject.get_border_classes}} shadow-xl">
+                {% csrf_token %}
+                <thead class="{{session.study_plan.subject.get_bg_classes}}">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium {{session.study_plan.subject.get_text_classes}} uppercase tracking-wider">
+                            Campo
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium {{session.study_plan.subject.get_text_classes}} uppercase tracking-wider">
+                            Informacion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y {{session.study_plan.subject.get_divide_classes}}">
+                    <tr class="{{session.study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Titulo de la sesion
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {{form.title}}
+                        </td>
+                    </tr>
+                    <tr class="{{session.study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Plan de estudio
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {{form.study_plan}}
+                        </td>
+                    </tr>
+                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Fecha de inicio
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {{form.start}}
+                        </td>
+                    </tr>
+                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Fecha limite
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {{form.end}}
+                        </td>
+                    </tr>
+                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            Notas
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {{form.notes}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="my-3">
+                <button type="submit" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md mr-2">
+                    Guardar
+                </button>
+                <button href="{% url 'session_view' title=session.title %}" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-md">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock 'content' %}

@@ -2,15 +2,28 @@
 
 {% block 'content' %}
 
-<section class="p-10">
+<section class="p-10 max-w-4xl mx-auto">
     
     <div class='grid grid-cols-3 gap-10 items-center box-content p-6 shadow-xl rounded-2xl'>
-      <div class="text-right">
-        <img src="{{ profile.profile_picture.url }}" alt="Imagen de perfil"
-            class="rounded-full w-40 h-40 object-cover border-4 border-gray-200 inline-block" />
+      <div class="text-center">
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <input id="file-input" type="file" name="profile_picture" accept="image/*" class="hidden" />
+
+          <label for="file-input" class="cursor-pointer inline-block">
+            <img src="{{ profile.profile_picture.url }}" 
+                alt="Foto de perfil" 
+                class="rounded-full w-40 h-40 object-cover border-4 border-indigo-400 hover:opacity-80 transition" />
+          </label>
+
+          <button type="submit" class="mt-4 bg-indigo-400 text-white px-4 py-2 rounded hover:bg-indigo-500">
+            Cambiar foto
+          </button>
+        </form>
       </div>
 
-      <!-- Texto -->
       <div class="">
         <h1 class="text-3xl font-bold text-gray-800 capitalize">
         {{profile.user.first_name}} {{profile.user.last_name}}
@@ -24,7 +37,7 @@
       <div class='text-left'>
     
       <h1>
-        <a href="#" class='p-2 px-4 rounded-xl border-2 border-indigo-500 text-indigo-500 font-medium hover:bg-indigo-500 hover:text-white transition'>
+        <a href="{% url 'profile_edit' %} " class='p-2 px-4 rounded-xl border-2 border-indigo-500 text-indigo-500 font-medium hover:bg-indigo-500 hover:text-white transition'>
           Editar perfil
         </a>
       </h1>
