@@ -3,29 +3,29 @@
 {% block 'content' %}
 
     <div class="p-6 m-2.5 max-w-4xl mx-auto">
-        <form action="{% url 'subject_edit' name=name %}" method='POST'>
-            <table class="min-w-full border {{subject.get_border_classes}} shadow-xl">
+        <form action="{% url 'subject_create'%}" method='POST'>
+            <table class="min-w-full border shadow-xl border-indigo-800">
                 {% csrf_token %}
-                <thead class="{{subject.get_bg_headtable}}">
+                <thead class="bg-indigo-100">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium {{subject.get_text_classes}} uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                             Campo
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium {{subject.get_text_classes}} uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                             Informacion
                         </th>
                     </tr>
                 </thead>
-                <tbody class="divide-y {{subject.get_divide_classes}}">
-                    <tr class="{{subject.get_hover_classes}} transition-colors duration-200">
+                <tbody class="divide-y divide-indigo-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Nombre de la materia
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 hover:bg-indigo-50">
                             {{form.name}}
                         </td>
                     </tr>
-                    <tr class="{{subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Profesor
                         </td>
@@ -33,7 +33,7 @@
                             {{form.teacher}}
                         </td>
                     </tr>
-                    <tr class="{{subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Color
                         </td>
@@ -41,7 +41,7 @@
                             {{form.color}}
                         </td>
                     </tr>
-                    <tr class="{{subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Descripcion
                         </td>
@@ -52,12 +52,12 @@
                 </tbody>
             </table>
             <div class="my-3">
-                <button type="submit" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md mr-2">
+                <button type="submit" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md mr-2 appearance-none">
                     Guardar
                 </button>
-                <button href="{% url 'subject_view' name=subject.name %}" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-md">
+                <a href="{% url 'subjects'%}" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-md inline-block">
                     Cancelar
-                </button>
+                </a>    
             </div>
         </form>
     </div>

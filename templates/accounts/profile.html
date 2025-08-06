@@ -5,6 +5,15 @@
 <section class="p-10 max-w-4xl mx-auto">
     
     <div class='grid grid-cols-3 gap-10 items-center box-content p-6 shadow-xl rounded-2xl'>
+
+      {% if messages %}
+            <ul class="space-y-2">
+                {% for message in messages %}
+                <li class="text-red-600 text-sm font-medium text-center mb-3">{{ message }}</li>
+                {% endfor %}
+            </ul>
+      {% endif %}
+
       <div class="text-center">
 
         <form method="POST" enctype="multipart/form-data">
@@ -34,14 +43,28 @@
         </p>
       </div>
 
-      <div class='text-left'>
-    
-      <h1>
-        <a href="{% url 'profile_edit' %} " class='p-2 px-4 rounded-xl border-2 border-indigo-500 text-indigo-500 font-medium hover:bg-indigo-500 hover:text-white transition'>
-          Editar perfil
-        </a>
-      </h1>
-
+      <div class='text-center'>
+        <div class="mb-5">
+          <h1>
+            <a href="{% url 'profile_edit' %} " class='inline-block w-40 py-2 px-2 rounded-xl border-2 border-indigo-500 text-indigo-500 font-medium hover:bg-indigo-500 hover:text-white transition'>
+              Editar perfil
+            </a>
+          </h1>
+        </div>
+        <div class="mb-5">
+          <h1>
+            <a href="{% url 'logout_view' %} " class='inline-block w-40 py-2 px-2 rounded-xl border-2 border-orange-500 text-orange-500 font-medium hover:bg-orange-500 hover:text-white transition'>
+              Cerrar sesion
+            </a>
+          </h1>
+        </div>
+        <div>
+          <h1>
+            <a href="{% url 'profile_delete' %} " class='inline-block w-40 py-2 px-2 rounded-xl border-2 border-red-500 text-red-500 font-medium hover:bg-red-500 hover:text-white transition'>
+              Eliminar cuenta
+            </a>
+          </h1>
+        </div>
       </div>
     </div>
 

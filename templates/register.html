@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+
+    <section class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6">
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li >{{message}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action="{% url 'register_view'%}" method="POST" class="space-y-4">
+            {% csrf_token %}
+            <h1 class="text-3xl font-bold text-center text-indigo-700">Crear cuenta</h1>
+            <div>
+                <label for="username" class="block text-sm font-medium">Nombre de usuario</label>
+                {{user_form.username}}
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Correo electronico</label>
+                {{user_form.email}}
+            </div>
+            <div>
+                <label for="first_name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                {{user_form.first_name}}
+            </div>
+            <div>
+                <label for="last_name" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                {{user_form.last_name}}
+            </div>
+            <div>
+                <label for="occupation" class="block text-sm font-medium text-gray-700">Ocupacion</label>
+                {{user_form.occupation}}
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                {{user_form.password}}
+            </div>
+            <div>
+                <button type="submit"
+                        class="mt-3 w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition">
+                    Crear
+                </button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

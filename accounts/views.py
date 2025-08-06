@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .forms import UserForm, ProfileImageForm
 from django.shortcuts import redirect
 
@@ -36,3 +35,8 @@ def profile_edit(request):
       if form.is_valid():
          form = form.save()
          return redirect('profile')
+
+def profile_delete(request):
+   user = request.user
+   user.delete()
+   return redirect('login_view')

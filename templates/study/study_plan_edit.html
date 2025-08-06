@@ -6,7 +6,7 @@
         <form action="{% url 'study_plan_edit' title=title %}" method="POST">
             <table class="min-w-full border {{study_plan.subject.get_border_classes}} shadow-xl">
                 {% csrf_token %}
-                <thead class="{{study_plan.subject.get_bg_classes}}">
+                <thead class="{{study_plan.subject.get_bg_headtable}}">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium {{study_plan.subject.get_text_classes}} uppercase tracking-wider">
                             Campo

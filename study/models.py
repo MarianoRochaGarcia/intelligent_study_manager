@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Profile
+from django.core.exceptions import ValidationError
 
 class Subject(models.Model):
 
@@ -25,31 +26,31 @@ class Subject(models.Model):
 
     def get_color_classes(self):
         color_map = {
-            'green': 'bg-green-100 text-green-800',
-            'lime': 'bg-lime-100 text-lime-800',
-            'teal': 'bg-[#D2EBE5] text-[#1E7460]',
-            'blue': 'bg-blue-100 text-blue-800',
-            'violet': 'bg-violet-100 text-violet-800',
-            'purple': 'bg-purple-100 text-purple-800',
-            'wine' : 'bg-[#B28092] text-[#A8003A]',
-            'red': 'bg-red-100 text-red-800',
-            'orange': 'bg-orange-100 text-orange-800',
-            'yellow': 'bg-yellow-100 text-yellow-800',
+            'green': 'bg-green-50 text-green-800',
+            'lime': 'bg-lime-50 text-lime-800',
+            'teal': 'bg-[#EAFFFA] text-[#1E7460]',
+            'blue': 'bg-blue-50 text-blue-800',
+            'violet': 'bg-violet-50 text-violet-800',
+            'purple': 'bg-purple-50 text-purple-800',
+            'wine' : 'bg-[#FFE3EE] text-[#A8003A]',
+            'red': 'bg-red-50 text-red-800',
+            'orange': 'bg-orange-50 text-orange-800',
+            'yellow': 'bg-yellow-50 text-yellow-800',
         }
         return color_map.get(self.color)
 
     def get_bg_classes(self):
         color_map = {
-            'green': 'bg-green-100',
-            'lime': 'bg-lime-100',
-            'teal': 'bg-[#D2EBE5]',
-            'blue': 'bg-blue-100',
-            'violet': 'bg-violet-100',
-            'purple': 'bg-purple-100',
-            'wine' : 'bg-[#E7D5DC]',
-            'red': 'bg-red-100',
-            'orange': 'bg-orange-100',
-            'yellow': 'bg-yellow-100',
+            'green': 'bg-green-50',
+            'lime': 'bg-lime-50',
+            'teal': 'bg-[#EAFFFA]',
+            'blue': 'bg-blue-50',
+            'violet': 'bg-violet-50',
+            'purple': 'bg-purple-50',
+            'wine' : 'bg-[#FFE3EE]',
+            'red': 'bg-red-50',
+            'orange': 'bg-orange-50',
+            'yellow': 'bg-yellow-50',
         }
         return color_map.get(self.color)
      
@@ -87,7 +88,7 @@ class Subject(models.Model):
         color_map = {
             'green': 'hover:bg-green-50',
             'lime': 'hover:bg-lime-50',
-            'teal': 'hover:bg-[#E6EFED]',
+            'teal': 'hover:bg-[#E8F8F4]',
             'blue': 'hover:bg-blue-50',
             'violet': 'hover:bg-violet-50',
             'purple': 'hover:bg-purple-50',
@@ -112,6 +113,22 @@ class Subject(models.Model):
             'yellow': 'divide-yellow-200',
         }
         return color_map.get(self.color)
+    
+    def get_bg_headtable(self):
+        color_map = {
+            'green': 'bg-green-100',
+            'lime': 'bg-lime-100',
+            'teal': 'bg-[#D2EBE5]',
+            'blue': 'bg-blue-100',
+            'violet': 'bg-violet-100',
+            'purple': 'bg-purple-100',
+            'wine' : 'bg-[#E7D5DC]',
+            'red': 'bg-red-100',
+            'orange': 'bg-orange-100',
+            'yellow': 'bg-yellow-100',
+        }
+        return color_map.get(self.color)
+        
 
 
     def __str__(self):
@@ -156,6 +173,11 @@ class StudyPlan(models.Model):
     progress_hours = models.IntegerField(default=0)
     status = models.CharField(choices=STATUS_CHOICES, max_length=15)
 
+    def clean(self):
+        super().clean()
+        if self.start_date >= self.limit_date:
+            raise ValidationError("La fecha de inicio debe ser anterior a la fecha limite")
+
     def __str__(self):
         return self.title
 
@@ -170,21 +192,26 @@ class StudySession(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     notes = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(choices = STATUS_CHOICES, max_length=15)
+    status = models.CharField(choices = STATUS_CHOICES, max_length=15, default="scheduled")
+
+    def clean(self):
+        super().clean()
+        if self.start >= self.end:
+            raise ValidationError("La fecha de inicio debe ser anterior a la fecha de fin")
 
     def get_color_status(self):
         color_map = {
-            'scheduled': 'bg-blue-100 text-blue-800',
-            'in_progress': 'bg-yellow-100 text-yellow-800',
-            'completed': 'bg-green-100 text-green-800',
+            'scheduled': 'bg-blue-50 text-blue-800',
+            'in_progress': 'bg-yellow-50 text-yellow-800',
+            'completed': 'bg-green-50 text-green-800',
         }
         return color_map.get(self.status)
     
     def get_bg_status(self):
         color_map = {
-            'scheduled': 'bg-blue-100',
-            'in_progress': 'bg-yellow-100',
-            'completed': 'bg-green-100',
+            'scheduled': 'bg-blue-50',
+            'in_progress': 'bg-yellow-50',
+            'completed': 'bg-green-50',
         }
         return color_map.get(self.status)
     

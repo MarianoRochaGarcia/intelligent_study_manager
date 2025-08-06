@@ -2,21 +2,30 @@
 
 {% block 'content' %}
     <div class="p-6 m-2.5 max-w-4xl mx-auto">
-        <form action="{% url 'session_edit' title=title %}" method="POST">
-            <table class="min-w-full border {{session.study_plan.subject.get_border_classes}} shadow-xl">
+        <form action="{% url 'session_create' %}" method="POST">
+            
+            {% if messages %}
+                <ul class="space-y-2">
+                    {% for message in messages %}
+                        <li class="text-red-600 text-sm font-medium text-center mb-3">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <table class="min-w-full border shadow-xl border-indigo-800">
                 {% csrf_token %}
-                <thead class="{{session.study_plan.subject.get_bg_headtable}}">
+                <thead class="bg-indigo-100">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium {{session.study_plan.subject.get_text_classes}} uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-indigo-800">
                             Campo
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium {{session.study_plan.subject.get_text_classes}} uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-indigo-800">
                             Informacion
                         </th>
                     </tr>
                 </thead>
-                <tbody class="divide-y {{session.study_plan.subject.get_divide_classes}}">
-                    <tr class="{{session.study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                <tbody class="divide-y divide-indigo-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Titulo de la sesion
                         </td>
@@ -24,7 +33,7 @@
                             {{form.title}}
                         </td>
                     </tr>
-                    <tr class="{{session.study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Plan de estudio
                         </td>
@@ -32,7 +41,7 @@
                             {{form.study_plan}}
                         </td>
                     </tr>
-                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Fecha de inicio
                         </td>
@@ -40,7 +49,7 @@
                             {{form.start}}
                         </td>
                     </tr>
-                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Fecha limite
                         </td>
@@ -48,7 +57,7 @@
                             {{form.end}}
                         </td>
                     </tr>
-                    <tr class="{{study_plan.subject.get_hover_classes}} transition-colors duration-200">
+                    <tr class="transition-colors duration-200 hover:bg-indigo-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             Notas
                         </td>
@@ -58,14 +67,24 @@
                     </tr>
                 </tbody>
             </table>
+
+            {% if form.errors %}
+                <div class="text-center py-2 px-4 rounded-md bg-red-400  mt-3 font-semibold">
+                    <p class="text-white">
+                        {{form.non_field_errors.0}}
+                    </p>
+                </div>
+            {% endif %}
+
             <div class="my-3">
-                <button type="submit" class="px-4 py-2 bg-indigo-400 hover:bg-indigo-500 text-white rounded-md mr-2">
+                <button type="submit" class="text-white px-4 py-2 bg-indigo-400 hover:bg-indigo-500 rounded-md mr-2 appearance-none">
                     Guardar
                 </button>
-                <button href="{% url 'session_view' title=session.title %}" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-md">
+                <a href="{% url 'sessions'%}" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-md inline-block">
                     Cancelar
-                </button>
+                </a>    
             </div>
+
         </form>
     </div>
 {% endblock 'content' %}

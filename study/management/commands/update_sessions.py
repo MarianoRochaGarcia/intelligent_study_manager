@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         now = timezone.now()
 
-        sessions = StudySession.objects.filter()
+        sessions = StudySession.objects.all()
 
         in_progress = 0
         finished = 0
@@ -27,6 +27,14 @@ class Command(BaseCommand):
                 elif session.status!='completed':
                     session.status = 'completed'
                     session.save()
+
+                    #Calculate duration in hours
+                    duration = (session.end -session.start).total_seconds()/3600
+
+                    #Add to the corresponding study plan
+                    plan = session.study_plan
+                    plan.progress_hours += int(duration)
+                    plan.save()
                     finished += 1
             elif session.start < now < session.end and session.status == 'scheduled':
                 session.status = 'in_progress'
